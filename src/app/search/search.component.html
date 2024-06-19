@@ -1,0 +1,35 @@
+<section class="search-section">
+    <h2>Search Data</h2>
+    <form (ngSubmit)="searchUseCase()">
+        <div class="form-group">
+            <label for="environment">Environment:</label>
+            <select id="environment" name="environment" [(ngModel)]="selectedEnvironment">
+                <option value="development">Development</option>
+                <option value="testing">Testing</option>
+                <option value="production">Production</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="eon-id">EON ID:</label>
+            <select id="eon-id" name="eon-id" [(ngModel)]="selectedEonId" (change)="updateUseCases()">
+                <option value="">Select EON ID</option>
+                <option value="eonid1">EON ID 1</option>
+                <option value="eonid2">EON ID 2</option>
+                <option value="eonid3">EON ID 3</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="use-case">Use Case:</label>
+            <mat-form-field appearance="fill">
+                <input type="text" id="use-case" name="use-case" [(ngModel)]="selectedUseCase"
+                    placeholder="Start typing to search use cases..." [matAutocomplete]="auto">
+                <mat-autocomplete #auto="matAutocomplete">
+                    <mat-option *ngFor="let useCase of filteredUseCases" [value]="useCase.text">
+                        {{ useCase.text }}
+                    </mat-option>
+                </mat-autocomplete>
+            </mat-form-field>
+        </div>
+        <button type="submit">Search</button>
+    </form>
+</section>
